@@ -20,7 +20,7 @@ app.use(
   session({
     name: 'account',
     keys: ['key1'], // what does this do?
-  })
+  }),
 )
 
 app.get('/', (req, res) => {
@@ -35,10 +35,9 @@ app.use('/account', AccountRouter)
 app.use('/api/questions', ApiRouter)
 
 app.use((err, req, res, next) => {
-  console.log(err.stack)
   res.status(500).send('There was an error!')
 })
 
 app.listen(3000, () => {
-  console.log('listening on port 3000')
+  // console.log('listening on port 3000')
 })

@@ -11,7 +11,6 @@ router.post('/signup', async (req, res, next) => {
     await User.create({ username, password })
     res.send('Created user')
   } catch (err) {
-    console.log(err)
     next(new Error('Signup problems'))
   }
 })
@@ -21,7 +20,7 @@ router.post('/login', async (req, res, next) => {
   try {
     const user = await User.findOne({ username })
     if (user) {
-      if (password == user.password) {
+      if (password === user.password) {
         req.session.username = username
         req.session.password = password
         res.send('Logged in')
@@ -32,7 +31,6 @@ router.post('/login', async (req, res, next) => {
       res.send('Cant find acc with that username')
     }
   } catch (err) {
-    console.log(err)
     next(new Error('Login problems'))
   }
 })

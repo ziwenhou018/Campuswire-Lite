@@ -10,7 +10,6 @@ router.get('/', async (req, res, next) => {
     const questions = await Question.find()
     res.send(questions)
   } catch (err) {
-    console.log(err)
     next(new Error('Fetch problems'))
   }
 })
@@ -25,7 +24,6 @@ router.post('/add', isAuthenticated, async (req, res, next) => {
     })
     res.send('Added new q')
   } catch (err) {
-    console.log(err)
     next(new Error('Add problems'))
   }
 })
@@ -36,7 +34,6 @@ router.post('/answer', isAuthenticated, async (req, res, next) => {
     await Question.updateOne({ _id }, { answer })
     res.send('Answered q')
   } catch (err) {
-    console.log(err)
     next(new Error('Answer problems'))
   }
 })
