@@ -5,18 +5,18 @@ const User = require('../models/user')
 
 const router = express.Router()
 
-router.post('/signup', async (req, res) => {
+router.post('/signup', async (req, res, next) => {
   const { username, password } = req.body
   try {
     await User.create({ username, password })
-    res.send('created user')
+    res.send('Created user')
   } catch (err) {
     console.log(err)
-    res.send('signup problems')
+    next(new Error('Signup problems'))
   }
 })
 
-router.post('/login', async (req, res) => {
+router.post('/login', async (req, res, next) => {
   const { username, password } = req.body
   try {
     const user = await User.findOne({ username })
@@ -24,23 +24,23 @@ router.post('/login', async (req, res) => {
       if (password == user.password) {
         req.session.username = username
         req.session.password = password
-        res.send('logged in')
+        res.send('Logged in')
       } else {
-        res.send('wrong pass')
+        res.send('Wrong pass')
       }
     } else {
-      res.send('cant find acc with that username')
+      res.send('Cant find acc with that username')
     }
   } catch (err) {
     console.log(err)
-    res.send('login problems')
+    next(new Error('Login problems'))
   }
 })
 
-router.post('/logout', isAuthenticated, (req, res) => {
+router.post('/logout', isAuthenticated, (req, res, next) => {
   req.session.username = null
   req.session.password = null
-  res.send('logged out')
+  res.send('Logged out')
 })
 
 module.exports = router

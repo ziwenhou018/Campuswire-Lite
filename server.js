@@ -25,10 +25,9 @@ app.use(
 
 app.get('/', (req, res) => {
   if (req.session.username && req.session.password) {
-    res.send(`hello ${req.session.username}`)
+    res.send(`Hello ${req.session.username}!`)
   } else {
-    console.log(req.session.username, req.session.password)
-    res.send('please log in')
+    res.send('Please log in')
   }
 })
 
@@ -37,7 +36,7 @@ app.use('/api/questions', ApiRouter)
 
 app.use((err, req, res, next) => {
   console.log(err.stack)
-  res.status(500).send('not logged in!')
+  res.status(500).send('There was an error!')
 })
 
 app.listen(3000, () => {
