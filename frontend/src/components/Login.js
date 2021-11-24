@@ -19,20 +19,35 @@ const Login = () => {
 
   return (
     <div>
-      <input
-        type="text"
-        onChange={e => setUsername(e.target.value)}
-        value={username}
-        placeholder="Username..."
-      />
-      <input
-        type="text"
-        onChange={e => setPassword(e.target.value)}
-        value={password}
-        placeholder="Password..."
-      />
-      <input type="button" value="Log In" onClick={onClickLoginButton} />
-      <Link to="/signup">Sign Up</Link>
+      <div className="title">Login</div>
+      <div>
+        <input
+          className="small-input"
+          type="text"
+          onChange={e => setUsername(e.target.value)}
+          value={username}
+          placeholder="Username..."
+        />
+      </div>
+      <div>
+        <input
+          className="small-input"
+          type="text"
+          onChange={e => setPassword(e.target.value)}
+          value={password}
+          placeholder="Password..."
+        />
+      </div>
+      <div>
+        <input
+          className="button"
+          type="button"
+          value="Log In"
+          onClick={onClickLoginButton}
+        />
+      </div>
+
+      <Link to="/signup">Don&apos;t have an account? Sign Up</Link>
     </div>
   )
 }
